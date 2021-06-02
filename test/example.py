@@ -1,20 +1,3 @@
-# redis-watcher
-
-Redis watcher for Pycasbin
-
-## Installation
-
-```
-git clone .
-cd dist
-pip install casbin_redis_watcher-0.0.1-py3-none-any.whl
-```
-
-
-
-## Basic Usage Example
-
-```python
 import casbin
 import redis_watcher
 
@@ -27,5 +10,4 @@ if __name__=="__main__":
     e.set_watcher(red_watcher)
     red_watcher.set_update_callback(update_callback)
     e.save_policy()
-```
 
