@@ -1,4 +1,4 @@
-from redis import Redis
+from redis.client import Redis
 from options import WatcherOptions
 from casbin.persist.watcher import Watcher as Casbin_Watcher
 
@@ -14,8 +14,8 @@ class Watcher:
 
     def __init__(self):
         self.mutex: asyncio.Lock = asyncio.Lock()
-        self.sub_client: Redis.client = None
-        self.pub_client: Redis.client = None
+        self.sub_client: Redis = None
+        self.pub_client: Redis = None
         self.options: WatcherOptions = None
         self.close = None
         self.callback: callable = None
@@ -36,11 +36,14 @@ class Watcher:
         async with self.mutex:
             self.callback = callback
 
-    async def update(self):
+    def update(self):
 
-        async with self.mutex:
+        async def func():
+            async with self.mutex:
+                return self.pub_client.publish()
 
-            _ = self.log_record()
+        return self.log_record(func)
+
 
     def log_record(self, f: callable):
         err = f()
