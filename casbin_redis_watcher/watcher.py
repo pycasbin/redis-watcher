@@ -1,6 +1,8 @@
 from redis import Redis
 from options import WatcherOptions
 from casbin.persist.watcher import Watcher as Casbin_Watcher
+
+import asyncio
 import json
 
 
@@ -11,7 +13,7 @@ class WatcherError(Exception):
 class Watcher:
 
     def __init__(self):
-        self.mutex = None
+        self.mutex: asyncio.Lock = asyncio.Lock()
         self.sub_client: Redis.client = None
         self.pub_client: Redis.client = None
         self.options: WatcherOptions = None
@@ -20,13 +22,31 @@ class Watcher:
         self.ctx = None
 
     def init_config(self, option: WatcherOptions):
-        if option.optional_update_callback is not None:
+        if option.optional_update_callback:
             self.set_update_callback(option.optional_update_callback)
         else:
-            raise WatcherError("Casbin Redis Watcher callback not set when an update was received")
+            raise WatcherError("Casbin Redis Watcher callback not "
+                               "set when an update was received")
+        if option.sub_client:
+            self.sub_client = option.sub_client
+        else:
+            self.sub_client = Redis().client()
 
-    def set_update_callback(self, option: WatcherOptions):
-        pass
+    async def set_update_callback(self, callback: callable):
+        async with self.mutex:
+            self.callback = callback
+
+    async def update(self):
+
+        async with self.mutex:
+
+            _ = self.log_record()
+
+    def log_record(self, f: callable):
+        err = f()
+        if err:
+            print(err)
+        return err
 
 
 class MSG:
