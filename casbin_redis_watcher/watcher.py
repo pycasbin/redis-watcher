@@ -134,11 +134,18 @@ def new_watcher(addr: str, option: WatcherOptions) -> Casbin_Watcher:
     w.pub_client = Redis().client()
     w.ctx = None
     w.close = None
+    w.init_config(option)
+    
 
 
 # TODO
 def new_publish_watcher(addr: str, option: WatcherOptions) -> Casbin_Watcher:
-    pass
+    option.addr = addr
+    w = Watcher()
+    w.pub_client = Redis().client()
+    w.ctx = None
+    w.close = None
+
 
 
 m = MSG()
