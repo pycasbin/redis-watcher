@@ -1,7 +1,4 @@
 # redis-watcher
-Redis watcher for PyCasbin
-
-# redis-watcher
 
 redis-watcher is the [Redis](https://github.com/redis/redis) watcher for [pycasbin](https://github.com/casbin/pycasbin). With this library, Casbin can synchronize the policy with the database in multiple enforcer instances.
 
