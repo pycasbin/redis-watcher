@@ -23,7 +23,6 @@ from casbin_redis_watcher.options import WatcherOptions
 
 
 class RedisWatcher:
-
     def __init__(self):
         self.mutex: Lock = Lock()
         self.sub_client: PubSub = None
@@ -54,7 +53,6 @@ class RedisWatcher:
             self.pub_client = option.pub_client
         else:
             self.pub_client = rds.client()
-            rds.pubsub()
 
         self.options = option
 
@@ -71,7 +69,6 @@ class RedisWatcher:
         return self.log_record(func)
 
     def update_for_add_policy(self, sec: str, ptype: str, *params: str):
-
         def func():
             with self.mutex:
                 msg = MSG("UpdateForAddPolicy", self.options.local_ID, sec, ptype, params)
@@ -80,7 +77,6 @@ class RedisWatcher:
         return self.log_record(func)
 
     def update_for_remove_policy(self, sec: str, ptype: str, *params: str):
-
         def func():
             with self.mutex:
                 msg = MSG("UpdateForRemovePolicy", self.options.local_ID, sec, ptype, params)
@@ -89,21 +85,29 @@ class RedisWatcher:
         return self.log_record(func)
 
     def update_for_remove_filtered_policy(self, sec: str, ptype: str, field_index: int, *params: str):
-
         def func():
             with self.mutex:
-                msg = MSG("UpdateForRemoveFilteredPolicy",
-                          self.options.local_ID,
-                          sec, ptype, f"{field_index} {' '.join(params)}")
+                msg = MSG(
+                    "UpdateForRemoveFilteredPolicy",
+                    self.options.local_ID,
+                    sec,
+                    ptype,
+                    f"{field_index} {' '.join(params)}",
+                )
                 return self.pub_client.publish(self.options.channel, msg.marshal_binary())
 
         return self.log_record(func)
 
     def update_for_save_policy(self, model: Model):
-
         def func():
             with self.mutex:
-                msg = MSG("UpdateForSavePolicy", self.options.local_ID, "", "", model.to_text())
+                msg = MSG(
+                    "UpdateForSavePolicy",
+                    self.options.local_ID,
+                    "",
+                    "",
+                    model.to_text(),
+                )
                 return self.pub_client.publish(self.options.channel, msg.marshal_binary())
 
         return self.log_record(func)

@@ -180,9 +180,7 @@ class TestConfig(TestCase):
         test_option.optional_update_callback = callback_function
         w = new_watcher(test_option)
 
-        e = casbin.Enforcer(
-            get_examples("rbac_model.conf"), get_examples("rbac_policy.csv")
-        )
+        e = casbin.Enforcer(get_examples("rbac_model.conf"), get_examples("rbac_policy.csv"))
         e.set_watcher(w)
         assert callback_flag is False
         e.save_policy()
