@@ -1,5 +1,7 @@
 # redis-watcher
 
+[![tests](https://github.com/pycasbin/redis-watcher/actions/workflows/release.yml/badge.svg)](https://github.com/pycasbin/redis-watcher/actions/workflows/release.yml) [![Coverage Status](https://coveralls.io/repos/github/pycasbin/redis-watcher/badge.svg)](https://coveralls.io/github/pycasbin/redis-watcher) [![Version](https://img.shields.io/pypi/v/casbin-redis-watcher.svg)](https://pypi.org/project/casbin-redis-watcher/) [![Download](https://img.shields.io/pypi/dm/casbin-redis-watcher.svg)](https://pypi.org/project/casbin-redis-watcher/) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/casbin/lobby)
+
 redis-watcher is the [Redis](https://github.com/redis/redis) watcher for [pycasbin](https://github.com/casbin/pycasbin). With this library, Casbin can synchronize the policy with the database in multiple enforcer instances.
 
 ## Installation
