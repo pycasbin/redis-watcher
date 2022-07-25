@@ -54,6 +54,8 @@ jobs:
         env:
           VALIDATE_PYTHON_BLACK: true
           DEFAULT_BRANCH: master
+          LINTER_RULES_PATH: /
+          PYTHON_BLACK_CONFIG_FILE: pyproject.toml
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   coveralls:
