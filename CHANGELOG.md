@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.0.1](https://github.com/pycasbin/redis-watcher/compare/v1.0.0...v1.0.1) (2022-08-07)
+
+
+### Bug Fixes
+
+* add publish watcher and small fix ([#9](https://github.com/pycasbin/redis-watcher/issues/9)) ([9319159](https://github.com/pycasbin/redis-watcher/commit/93191590ef16f403a52b92571420bec2e515b687))
+
 # 1.0.0 (2022-07-25)
 
 
