@@ -30,7 +30,6 @@ class RedisWatcher:
         self.options: WatcherOptions = None
         self.close = None
         self.callback: callable = None
-        self.ctx = None
         self.subscribe_thread: Thread = Thread(target=self.subscribe, daemon=True)
         self.subscribe_event = Event()
         self.logger = logging.getLogger(__name__)
@@ -41,18 +40,6 @@ class RedisWatcher:
         else:
             self.logger.warning("No callback function is set.Use the default callback function.")
             self.callback = self.default_callback_func
-
-        rds = Redis(host=option.host, port=option.port, password=option.password)
-
-        if option.sub_client:
-            self.sub_client = option.sub_client
-        else:
-            self.sub_client = rds.client().pubsub()
-
-        if option.pub_client:
-            self.pub_client = option.pub_client
-        else:
-            self.pub_client = rds.client()
 
         self.options = option
 
@@ -160,12 +147,10 @@ def new_watcher(option: WatcherOptions):
     option.init_config()
     w = RedisWatcher()
     rds = Redis(host=option.host, port=option.port, password=option.password)
+    if rds.ping() is False:
+        raise Exception("Redis server is not available.")
     w.sub_client = rds.client().pubsub()
     w.pub_client = rds.client()
-    if w.sub_client.ping() is False or w.pub_client.ping() is False:
-        w.logger.error("Casbin Redis Watcher error: Redis connection failed.")
-    w.ctx = None
-    w.close = None
     w.init_config(option)
     w.close = False
     w.subscribe_thread.start()
@@ -173,12 +158,13 @@ def new_watcher(option: WatcherOptions):
     return w
 
 
-# TODO
-def new_publish_watcher(addr: str, option: WatcherOptions):
-    option.addr = addr
+def new_publish_watcher(option: WatcherOptions):
+    option.init_config()
     w = RedisWatcher()
-    w.pub_client = Redis().client()
-    w.ctx = None
-    w.close = None
+    rds = Redis(host=option.host, port=option.port, password=option.password)
+    if rds.ping() is False:
+        raise Exception("Redis server is not available.")
+    w.pub_client = rds.client()
     w.init_config(option)
+    w.close = False
     return w

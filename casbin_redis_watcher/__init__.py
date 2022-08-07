@@ -13,4 +13,4 @@
 # limitations under the License.
 
 from .options import WatcherOptions
-from .watcher import RedisWatcher, new_watcher
+from .watcher import RedisWatcher, new_watcher, new_publish_watcher
