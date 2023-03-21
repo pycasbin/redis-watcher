@@ -19,6 +19,7 @@ class WatcherOptions:
     password = None
     host = "localhost"
     port = "6379"
+    ssl = False
     sub_client = None
     pub_client = None
     channel = None
