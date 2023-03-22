@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.1.0](https://github.com/pycasbin/redis-watcher/compare/v1.0.1...v1.1.0) (2023-03-22)
+
+
+### Features
+
+* Add ssl option ([#10](https://github.com/pycasbin/redis-watcher/issues/10)) ([b025d29](https://github.com/pycasbin/redis-watcher/commit/b025d29c798249394eb9611e7d3611a3df6c53a7))
+
 ## [1.0.1](https://github.com/pycasbin/redis-watcher/compare/v1.0.0...v1.0.1) (2022-08-07)
 
 
