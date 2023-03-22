@@ -27,6 +27,7 @@ if __name__ == "main":
     test_option.host = "localhost"
     test_option.port = "6379"
     test_option.channel = "test"
+    test_option.ssl = False
     test_option.optional_update_callback = callback_function
     w = new_watcher(test_option)
     
