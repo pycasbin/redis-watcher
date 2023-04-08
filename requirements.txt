@@ -1,2 +1,2 @@
-casbin==1.18.0
+casbin~=1.18
 redis==4.5.2
