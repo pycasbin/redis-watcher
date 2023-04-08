@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.1.1](https://github.com/pycasbin/redis-watcher/compare/v1.1.0...v1.1.1) (2023-04-08)
+
+
+### Bug Fixes
+
+* compatibility with later casbin patches ([#11](https://github.com/pycasbin/redis-watcher/issues/11)) ([f5dba83](https://github.com/pycasbin/redis-watcher/commit/f5dba836b9397fb6bf8b97b47c81b156ed2ec04f))
+
 # [1.1.0](https://github.com/pycasbin/redis-watcher/compare/v1.0.1...v1.1.0) (2023-03-22)
 
 
