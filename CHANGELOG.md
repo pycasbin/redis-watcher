@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.2.0](https://github.com/pycasbin/redis-watcher/compare/v1.1.1...v1.2.0) (2023-10-30)
+
+
+### Features
+
+* migrate from setup.py to pyproject.toml ([#12](https://github.com/pycasbin/redis-watcher/issues/12)) ([4bc0a3a](https://github.com/pycasbin/redis-watcher/commit/4bc0a3a3d9d43ca5413ba30c8912d7be5d207a8b))
+
 ## [1.1.1](https://github.com/pycasbin/redis-watcher/compare/v1.1.0...v1.1.1) (2023-04-08)
 
 
