@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.3.0](https://github.com/pycasbin/redis-watcher/compare/v1.2.0...v1.3.0) (2024-03-29)
+
+
+### Features
+
+* upgrade CI Node.js version to 20 ([13ee383](https://github.com/pycasbin/redis-watcher/commit/13ee383b78114b2c7edddb087c4df4d4e3704644))
+
 # [1.2.0](https://github.com/pycasbin/redis-watcher/compare/v1.1.1...v1.2.0) (2023-10-30)
 
 
